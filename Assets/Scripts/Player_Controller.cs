@@ -47,8 +47,8 @@ public class Player_Controller : MonoBehaviour {
         //animator.SetBool("Ground", isGrounded);
         //animator.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y); 
 
-        Move(Input.GetAxis("Horizontal"));
         // Get move directions
+        Move(Input.GetAxis("Horizontal"));
         //move = Input.GetAxis("Horizontal");
 
         // Check if player is jumping
@@ -83,6 +83,7 @@ public class Player_Controller : MonoBehaviour {
 
     }
 
+    // Move the player
     public void Move(float horizontalInput)
     {
         // Check if the player is in the air
@@ -117,11 +118,9 @@ public class Player_Controller : MonoBehaviour {
 
         // Get local scale and flip over the x axis
         Vector3 theScale = transform.localScale;
-
         theScale.x *= -1;
 
         // Update local scale
         transform.localScale = theScale;
-
     }
 }
