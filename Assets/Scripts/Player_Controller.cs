@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Controller : MonoBehaviour {
+public class Player_Controller : MonoBehaviour
+{
 
     // Public variables
     public float topSpeed = 2.0f;       // How fast the player can move
     public float jumpForce = 3.0f;      // Force applied to player when jumping
-    public Transform groundCheck;       // Transform at player's feet to check if player is grounded
-    public LayerMask whatIsGround;      // What layer is considered the ground
-    public float groundRadius = 0.2f;   // The radius of the circle used for checking the distance to the ground
     public LayerMask playerMask;
     public bool canMoveInAir = true;
 
@@ -29,53 +27,20 @@ public class Player_Controller : MonoBehaviour {
         tagGround = GameObject.Find(this.name + "/tag_ground").transform;
 
         animator = GetComponent<Animator>();
-        groundCheck = GetComponent<Transform>();
-        whatIsGround = 8;
-        Debug.Log(whatIsGround.value);
     }
 
     // Physics will be manipulated at the end of each fram in fixed update
     void FixedUpdate()
     {
-        //Debug.Log(groundCheck.position);
-        // Will return true or false depending on whether groundCheck hit whatIsGround with the groundRadius
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
         // Will return true or false depending on wether the player collids with something or not
         isGrounded = Physics2D.Linecast(myTrans.position, tagGround.position, playerMask);
 
-        //animator.SetBool("Ground", isGrounded);
-        //animator.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y); 
-
         // Get move directions
         Move(Input.GetAxis("Horizontal"));
-        //move = Input.GetAxis("Horizontal");
 
         // Check if player is jumping
         if (Input.GetButtonDown("Jump"))
             Jump();
-
-        /*
-        // Adds velocity to the Rigidbody in the move direction multiplied with speed.
-        myBody.velocity = new Vector2(move * topSpeed, myBody.velocity.y);
-
-        animator.SetFloat("Speed", Mathf.Abs(move));
-
-        // Check if the sprite needs to be flipped
-        if (move > 0 && !facingRight)
-            Flip();
-        else if (move < 0 && facingRight)
-            Flip();
-        */
-
-        /*
-        // Can the player jump, if yes: add jump force
-        if (isGrounded && Input.GetKeyDown(KeyCode.Z))
-        {
-            animator.SetBool("Grounded", false);
-            myBody.AddForce(new Vector2(0, jumpForce));
-        }
-        */
     }
 
     void Update()
@@ -104,7 +69,7 @@ public class Player_Controller : MonoBehaviour {
 
     public void Jump()
     {
-        if(isGrounded)
+        if (isGrounded)
             myBody.velocity += jumpForce * Vector2.up;
     }
 
