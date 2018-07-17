@@ -40,12 +40,16 @@ public class Player_Controller : MonoBehaviour
 
         // Check if player is jumping
         if (Input.GetButtonDown("Jump"))
+        {
             Jump();
+            animator.SetBool("Jump", true);
+        }
+           
     }
 
     void Update()
     {
-
+        
     }
 
     // Move the player
@@ -71,6 +75,8 @@ public class Player_Controller : MonoBehaviour
     {
         if (isGrounded)
             myBody.velocity += jumpForce * Vector2.up;
+
+        
     }
 
 
