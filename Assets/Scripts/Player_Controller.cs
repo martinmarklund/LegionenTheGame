@@ -42,7 +42,6 @@ public class Player_Controller : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-            animator.SetBool("Jump", true);
         }
            
     }
@@ -74,9 +73,11 @@ public class Player_Controller : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)
+        {
             myBody.velocity += jumpForce * Vector2.up;
-
-        
+            Debug.Log("Jumped");
+        }
+        animator.SetTrigger("Jump");
     }
 
 
