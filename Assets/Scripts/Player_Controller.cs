@@ -17,6 +17,9 @@ public class Player_Controller : MonoBehaviour
     private Animator animator;          // Reference to animator
     private bool isGrounded = false;    // Not grounded by default
 
+    private float jumpTime = 0f;        // Used as a timer for when trigger "Land" will activate
+    private float jumpDelay = 0.5f;     // 
+
     Rigidbody2D myBody;
     Transform myTrans, tagGround;
 
@@ -75,9 +78,10 @@ public class Player_Controller : MonoBehaviour
         if (isGrounded)
         {
             myBody.velocity += jumpForce * Vector2.up;
-            Debug.Log("Jumped");
+            animator.SetTrigger("Jump");
         }
-        animator.SetTrigger("Jump");
+        
+
     }
 
 
