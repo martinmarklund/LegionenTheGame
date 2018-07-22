@@ -17,8 +17,9 @@ public class Player_Controller : MonoBehaviour
     private Animator animator;          // Reference to animator
     private bool isGrounded = false;    // Not grounded by default
 
+    private bool jumped;
     private float jumpTime = 0f;        // Used as a timer for when trigger "Land" will activate
-    private float jumpDelay = 0.5f;     // 
+    public float jumpDelay = 0.5f;     // 
 
     Rigidbody2D myBody;
     Transform myTrans, tagGround;
@@ -44,9 +45,16 @@ public class Player_Controller : MonoBehaviour
         // Check if player is jumping
         if (Input.GetButtonDown("Jump"))
         {
+            jumpTime = jumpDelay;
             Jump();
+            jumped = true;
         }
-           
+        jumpTime -= Time.deltaTime; 
+        if(jumpTime <= 0 && isGrounded && jumped)
+            {
+                animator.SetTrigger("Land");
+                jumped = false;
+            }
     }
 
     void Update()
@@ -80,8 +88,6 @@ public class Player_Controller : MonoBehaviour
             myBody.velocity += jumpForce * Vector2.up;
             animator.SetTrigger("Jump");
         }
-        
-
     }
 
 
