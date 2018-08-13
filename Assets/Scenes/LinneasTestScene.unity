@@ -113,6 +113,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &32184972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 32184973}
+  m_Layer: 10
+  m_Name: sightEndL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32184973
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32184972}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.47, y: -1.526, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1327788546}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &159968394
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +185,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.3525476
+  orthographic size: 2.667987
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -222,8 +250,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294966271
   sightStart: {fileID: 0}
-  sightEnd: {fileID: 0}
-  spotted: 0
+  sightEndL: {fileID: 0}
+  sightEndR: {fileID: 0}
+  spottedL: 0
+  spottedR: 0
 --- !u!50 &786931319
 Rigidbody2D:
   serializedVersion: 4
@@ -485,6 +515,7 @@ Transform:
   m_Children:
   - {fileID: 2039986322}
   - {fileID: 1657596697}
+  - {fileID: 32184973}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -504,8 +535,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294966271
   sightStart: {fileID: 2039986322}
-  sightEnd: {fileID: 1657596697}
-  spotted: 0
+  sightEndL: {fileID: 32184973}
+  sightEndR: {fileID: 1657596697}
+  spottedL: 0
+  spottedR: 0
 --- !u!1 &1348439527
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +711,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1348439527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.657, y: 0.683, z: 0}
+  m_LocalPosition: {x: -1.42, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2081038052}
@@ -994,7 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657596697}
   m_Layer: 10
-  m_Name: sightEnd
+  m_Name: sightEndR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1007,7 +1040,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1657596696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.436, y: -1.748, z: 0}
+  m_LocalPosition: {x: 0.436, y: -1.526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1327788546}
