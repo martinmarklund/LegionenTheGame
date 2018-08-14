@@ -21,17 +21,17 @@ public class Player_Controller : MonoBehaviour
     public Collider2D[] myColls;
 
     // Private variables
-    private float move;                 // Float holding move direction
-    private bool facingRight = true;    // Is the player facing right
-    private Animator animator;          // Reference to animator
-    private bool isGrounded = false;    // Not grounded by default
-
-    private bool jumped;
-    private float jumpTime = 0f;        // Used as a timer for when trigger "Land" will activate
-    public float jumpDelay = 0.5f;     // 
-
+    float move;                 // Float holding move direction
+    bool facingRight = true;    // Is the player facing right
+    Animator animator;          // Reference to animator
+    bool isGrounded = false;    // Not grounded by default
     Rigidbody2D myBody;
     Transform myTrans, tagGround;
+
+    // Jump
+    bool jumped;
+    float jumpTime = 0f;        // Used as a timer for when trigger "Land" will activate
+    public float jumpDelay = 0.5f;
 
     // Initiation
     void Start()
@@ -50,7 +50,6 @@ public class Player_Controller : MonoBehaviour
     {
         // Will return true or false depending on wether the player collids with something or not
         isGrounded = Physics2D.Linecast(myTrans.position, tagGround.position, playerMask);
-        //Debug.Log("Grounded?? " + isGrounded);
 
         // Get move directions
         Move(Input.GetAxis("Horizontal"));
@@ -165,19 +164,14 @@ public class Player_Controller : MonoBehaviour
     }
 
     // Checks if there is a collision between the player and any enemies
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Enemy_Controller enemy = collision.collider.GetComponent<Enemy_Controller>();
-        Debug.Log("Enemy " + enemy);
         if(enemy != null)
         {
             bool enemyHurt = false;
             foreach(ContactPoint2D point in collision.contacts)
             {
-                // To see the direction of the hit
-                Debug.Log(point.normal);
-                Debug.DrawLine(point.point, point.point + point.normal, Color.red, 10);
-
                 if(point.normal.y >= 0.9f)
                 {
                     Vector2 velocity = myBody.velocity;
