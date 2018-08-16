@@ -18,6 +18,15 @@ public class Player_Controller : MonoBehaviour
     public float invincibleAfterHurt = 2;
     public float damageCooldown = 5;
 
+    // Sound effects
+    public AudioClip jumpSound1;
+    public AudioClip jumpSound2;
+    public AudioClip pineappleSound;
+    public AudioClip cubesSound;
+    public AudioClip brooshSound;
+    public AudioClip hurtSound;
+    public AudioClip gameOverSound;
+
     [HideInInspector]
     public Collider2D[] myColls;
 
@@ -102,6 +111,23 @@ public class Player_Controller : MonoBehaviour
         {
             myBody.velocity += jumpForce * Vector2.up;
             animator.SetTrigger("Jump");
+            SoundManager.instance.RandomizeSfx(jumpSound1, jumpSound2);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Pineapple")
+        {
+            SoundManager.instance.PlaySingle(pineappleSound);
+        }
+        else if (other.tag == "Cubes")
+        {
+            SoundManager.instance.PlaySingle(cubesSound);
+        }
+        else if (other.tag == "Broosh")
+        {
+            SoundManager.instance.PlaySingle(brooshSound);
         }
     }
 
@@ -157,6 +183,7 @@ public class Player_Controller : MonoBehaviour
     void Hurt()
     {
         health--;
+        SoundManager.instance.PlaySingle(hurtSound);
         Debug.Log("Healh = " + health);
         if(health <= 0)
         {
