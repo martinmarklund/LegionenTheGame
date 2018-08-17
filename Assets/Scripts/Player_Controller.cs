@@ -114,6 +114,8 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+
+    // Used for sound triggers
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Pineapple")
