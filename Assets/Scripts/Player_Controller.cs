@@ -16,6 +16,7 @@ public class Player_Controller : MonoBehaviour
     // Combat
     public int health = 3;
     public float invincibleAfterHurt = 2;
+    public float damageCooldown = 5;
 
     // Sound effects
     public AudioClip jumpSound1;
@@ -175,6 +176,11 @@ public class Player_Controller : MonoBehaviour
         animator.SetLayerWeight(1, 0);
     }
 
+    IEnumerator Damage()
+    {
+        yield return new WaitForSeconds(damageCooldown);
+    }
+
     // Remove health when hurt
     void Hurt()
     {
@@ -188,6 +194,7 @@ public class Player_Controller : MonoBehaviour
         }
         else 
         {
+            //StartCoroutine(Damage());
             TriggerHurt(invincibleAfterHurt);
         }
     }
@@ -196,6 +203,7 @@ public class Player_Controller : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Enemy_Controller enemy = collision.collider.GetComponent<Enemy_Controller>();
+        Debug.Log(enemy.name);
         if(enemy != null)
         {
             bool enemyHurt = false;
@@ -215,5 +223,7 @@ public class Player_Controller : MonoBehaviour
                 Hurt();
             }
         }
+
+        // TO DO: Fix so that the player doesn't die when getting hit by falling objects. 
     }
 }
