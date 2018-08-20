@@ -83,7 +83,6 @@ public class Player_Controller : MonoBehaviour
         }
         if (timeShield <= 0)
         {
-            //Debug.Log("Not shielded");
             isShielded = !isShielded;
             timeShield = 0.0f;
         }
