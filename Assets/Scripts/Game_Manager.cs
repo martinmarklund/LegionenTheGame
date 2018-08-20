@@ -30,7 +30,5 @@ public class Game_Manager : MonoBehaviour {
 
         if (gameTime <= 0)
             Debug.Log("Time is up!");
-
-
 	}
 }
