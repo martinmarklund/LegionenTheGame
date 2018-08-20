@@ -35,7 +35,9 @@ public class Player_Controller : MonoBehaviour
     bool facingRight = true;    // Is the player facing right
     Animator animator;          // Reference to animator
     bool isGrounded = false;    // Not grounded by default
-    bool isShielded = false;
+    bool isShielded = false;    // Not shielde by default
+    float timeShield = 10.0f;   // Duration of Broosh power
+    float timeStronger = 10.0f; // Duration of Cube power
     Rigidbody2D myBody;
     Transform myTrans, tagGround;
 
@@ -78,6 +80,17 @@ public class Player_Controller : MonoBehaviour
         {
             animator.SetTrigger("Land");
             jumped = false;
+        }
+        if (timeShield <= 0)
+        {
+            isShielded = !isShielded;
+            timeShield = 0.0f;
+        }
+        if (timeStronger <= 0)
+        {
+            topSpeed = 2.5f;
+            jumpForce = 7.0f;
+            timeStronger = 0.0f;
         }
     }
 
@@ -200,6 +213,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+
     // Checks if there is a collision between the player and any enemies
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -223,9 +237,40 @@ public class Player_Controller : MonoBehaviour
             {
                 Hurt();
             }
+            if(isShielded)
+            {
+                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            }
         }
+        // TODO: Fix so that the player doesn't die when getting hit by falling objects. 
+    }
 
-        // TO DO: Fix so that the player doesn't die when getting hit by falling objects. 
+    public IEnumerator StartCountdownStronger()
+    {
+        while(timeStronger >= 0)
+        {
+            if(timeStronger <= 0)
+            {
+                yield break;
+            }
+            yield return new WaitForSeconds(1.0f);
+            timeStronger--;
+        }
+        yield return null;
+    }
+
+    public IEnumerator StartCountdownShield()
+    {
+        while (timeShield >= 0)
+        {
+            if(timeShield <= 0)
+            {
+                yield break;
+            }
+            yield return new WaitForSeconds(1.0f);
+            timeShield--;
+        }
+        yield return null;
     }
 
     public void AddHealth(float healthAmount)
@@ -237,10 +282,17 @@ public class Player_Controller : MonoBehaviour
     public void FasterStronger()
     {
         // Use IEnumerator to have a periodic power up
+        topSpeed = 10.0f;
+        jumpForce = 10.0f;
+        timeStronger = 10.0f;
+        StartCoroutine(StartCountdownStronger());
     }
 
     public void Shielded()
     {
         isShielded = true;
+        timeShield = 10.0f;
+        Debug.Log("shielded activated: " + isShielded);
+        StartCoroutine(StartCountdownShield());
     }
 }
