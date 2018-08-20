@@ -19,6 +19,10 @@ public class GameOverScript : MonoBehaviour {
 
     void Update () {
         if (Input.GetKeyDown("space"))
+        {
+            PlayerStats.Score = -finalScore;
             Application.LoadLevel("Startskärm");
+        }
+            
 	}
 }
