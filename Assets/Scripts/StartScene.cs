@@ -8,7 +8,7 @@ public class StartScene : MonoBehaviour {
 		
         if(Input.GetKeyDown("space"))
         {
-            Application.LoadLevel("Folkparken");
+            Application.LoadLevel("Instruktioner");
         }
 
 	}
