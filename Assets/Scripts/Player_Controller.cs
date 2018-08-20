@@ -174,7 +174,7 @@ public class Player_Controller : MonoBehaviour
     IEnumerator HurtBlinker(float hurtTime)
     {
         // Ignore collision with enemies
-        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        enemyLayer = LayerMask.NameToLayer("Enemy");
         int playerLayer = LayerMask.NameToLayer("Player");
         Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer);
         foreach(Collider2D col in myColls)
