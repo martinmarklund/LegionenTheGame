@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+
     // Public variables
     //public static Player_Controller instance;
     public LayerMask playerMask;
     public bool canMoveInAir = true;
-    public int score = 0;
     // Movement
     public float topSpeed = 2.0f;       // How fast the player can move
     public float jumpForce = 3.0f;      // Force applied to player when jumping
@@ -26,9 +26,12 @@ public class Player_Controller : MonoBehaviour
     public AudioClip brooshSound;
     public AudioClip hurtSound;
     public AudioClip gameOverSound;
+    public AudioClip nollanSound;
 
     [HideInInspector]
     public Collider2D[] myColls;
+
+    public int score = 0;
 
     // Private variables
     float move;                 // Float holding move direction
@@ -100,7 +103,7 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
-        
+        score = PlayerStats.Score;
     }
 
     // Move the player
@@ -148,6 +151,11 @@ public class Player_Controller : MonoBehaviour
         else if (other.tag == "Broosh")
         {
             SoundManager.instance.PlaySingle(brooshSound);
+        }
+        else if(other.tag == "Nollan")
+        {
+            Debug.Log("Nollan");
+            SoundManager.instance.PlaySingle(nollanSound);
         }
     }
 
@@ -208,7 +216,7 @@ public class Player_Controller : MonoBehaviour
         if(health <= 0)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Application.LoadLevel(Application.loadedLevel);
+            Application.LoadLevel("Game over");
         }
         else 
         {
@@ -247,6 +255,9 @@ public class Player_Controller : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(enemyLayer, gameObject.layer, true);
             }
         }
+
+        if (collision.collider.tag == "Kill zone")
+            Application.LoadLevel("Game over");
         // TODO: Fix so that the player doesn't die when getting hit by falling objects. 
     }
 

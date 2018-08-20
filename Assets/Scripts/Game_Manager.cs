@@ -29,6 +29,8 @@ public class Game_Manager : MonoBehaviour {
         gameTime -= Time.deltaTime;
 
         if (gameTime <= 0)
-            Debug.Log("Time is up!");
+        {
+            Application.LoadLevel("Game over");
+        }
 	}
 }
