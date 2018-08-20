@@ -32,8 +32,5 @@ public class Game_Manager : MonoBehaviour {
         {
             Application.LoadLevel("Game over");
         }
-            
-
-
 	}
 }
