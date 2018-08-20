@@ -298,8 +298,8 @@ public class Player_Controller : MonoBehaviour
     public void FasterStronger()
     {
         // Use IEnumerator to have a periodic power up
-        topSpeed = 2.0f;
-        jumpForce = 8.0f;
+        topSpeed = 3.0f;
+        jumpForce = 9.0f;
 
         timeStronger = 10.0f;
         Debug.Log("POWER UP: Faster Stronger");

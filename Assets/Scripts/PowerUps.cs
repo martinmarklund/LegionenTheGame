@@ -83,7 +83,8 @@ public class PowerUps : MonoBehaviour {
             if(name.Contains("Nollan"))
             {
                 Debug.Log("NÄMEN HEEEEJ NOLLAN");
-                player.score += 5000;
+                PlayerStats.Score = 5000;
+                Destroy(gameObject);
             }
         }
     }

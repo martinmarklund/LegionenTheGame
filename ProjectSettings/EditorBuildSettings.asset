@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: "Assets/Scenes/Startsk\xE4rm.unity"
     guid: f77d31b807b344c53920384b369441c8
   - enabled: 1
+    path: Assets/Scenes/Instruktioner.unity
+    guid: 9050d71b2d97c4947a7ee1cb099405ff
+  - enabled: 1
     path: Assets/Scenes/Folkparken.unity
     guid: e18bb9a5ecc9b0c46bcd21ae55d3e7b5
   - enabled: 1

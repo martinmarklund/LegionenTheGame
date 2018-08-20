@@ -23,6 +23,8 @@ public class GameOverScript : MonoBehaviour {
             PlayerStats.Score = -finalScore;
             Application.LoadLevel("Startskärm");
         }
+        if (Input.GetKeyDown("escape"))
+            Application.Quit();
             
 	}
 }

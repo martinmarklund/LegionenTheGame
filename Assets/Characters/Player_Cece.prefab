@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1461535056240864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.81, y: -2.83, z: 0.43083775}
+  m_LocalPosition: {x: -2.96, y: -4.19, z: 0.43083775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4975360564449186}
@@ -167,7 +167,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294966783
   canMoveInAir: 1
-  score: 0
   topSpeed: 2.5
   jumpForce: 7
   health: 3
@@ -180,7 +179,9 @@ MonoBehaviour:
   brooshSound: {fileID: 8300000, guid: 22957b4c3917a69418611b46d4a2de04, type: 3}
   hurtSound: {fileID: 8300000, guid: 79ef63ec8a652ba479a3115821e86c3b, type: 3}
   gameOverSound: {fileID: 0}
+  nollanSound: {fileID: 0}
   myColls: []
+  score: 0
   jumpDelay: 0.5
 --- !u!212 &212009254325326540
 SpriteRenderer:
