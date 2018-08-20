@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212690653427747462}
   - component: {fileID: 95254236343417960}
   m_Layer: 0
-  m_Name: MT_2
+  m_Name: Nollan_MT_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
