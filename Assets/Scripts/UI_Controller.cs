@@ -14,23 +14,29 @@ public class UI_Controller : MonoBehaviour {
     private Game_Manager managerScript;
     private GameObject manager;
 
+
     // Use this for initialization
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        //player = GameObject.FindWithTag("Player");
-        if (player.tag == "Player")
-            Debug.Log("Player found");
-        playerScript = player.GetComponent<Player_Controller>();
-
-        manager = GameObject.Find("Game Manager");
-        managerScript = manager.GetComponent<Game_Manager>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+            playerScript = player.GetComponent<Player_Controller>();
+            Debug.Log("Player found!");
+        }
+        if(manager == null)
+        {
+            manager = GameObject.Find("Game Manager");
+            managerScript = manager.GetComponent<Game_Manager>();
+            Debug.Log("Manager found!");
+        }
+
 
         if (playerScript.health <= 0)
             healthText.text = "Oj oj";
