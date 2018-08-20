@@ -239,7 +239,13 @@ public class Player_Controller : MonoBehaviour
             }
             if(isShielded)
             {
+                // Ignore layer "Enemy"
+
                 Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                if(Physics2D.GetIgnoreCollision(collision.collider, GetComponent<Collider2D>()))
+                {
+                    Debug.Log("ALL COLLISIONS WERE IGNORED!!!!");
+                }
             }
         }
         // TODO: Fix so that the player doesn't die when getting hit by falling objects. 
