@@ -38,6 +38,7 @@ public class Player_Controller : MonoBehaviour
     bool isShielded = false;    // Not shielde by default
     float timeShield = 10.0f;   // Duration of Broosh power
     float timeStronger = 10.0f; // Duration of Cube power
+    int enemyLayer;
     Rigidbody2D myBody;
     Transform myTrans, tagGround;
 
@@ -81,10 +82,13 @@ public class Player_Controller : MonoBehaviour
             animator.SetTrigger("Land");
             jumped = false;
         }
+
+        // Reset and reenable collision after power up
         if (timeShield <= 0)
         {
             isShielded = !isShielded;
             timeShield = 0.0f;
+            Physics2D.IgnoreLayerCollision(enemyLayer, gameObject.layer, false);
         }
         if (timeStronger <= 0)
         {
@@ -170,7 +174,7 @@ public class Player_Controller : MonoBehaviour
     IEnumerator HurtBlinker(float hurtTime)
     {
         // Ignore collision with enemies
-        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        enemyLayer = LayerMask.NameToLayer("Enemy");
         int playerLayer = LayerMask.NameToLayer("Player");
         Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer);
         foreach(Collider2D col in myColls)
@@ -221,6 +225,7 @@ public class Player_Controller : MonoBehaviour
         if(enemy != null)
         {
             bool enemyHurt = false;
+            enemyLayer = collision.gameObject.layer;
             foreach(ContactPoint2D point in collision.contacts)
             {
                 if(point.normal.y >= 0.9f)
@@ -232,14 +237,14 @@ public class Player_Controller : MonoBehaviour
                     enemyHurt = true;
                 }
             }
-            Debug.Log("Shielded? " + isShielded);
             if(!enemyHurt && !isShielded)
             {
                 Hurt();
             }
             if(isShielded)
             {
-                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                // Ignore layer "Enemy"
+                Physics2D.IgnoreLayerCollision(enemyLayer, gameObject.layer, true);
             }
         }
         // TODO: Fix so that the player doesn't die when getting hit by falling objects. 
@@ -276,7 +281,7 @@ public class Player_Controller : MonoBehaviour
     public void AddHealth(float healthAmount)
     {
         health += healthAmount;
-        Debug.Log("POWER UP: Current health = " + health);
+        Debug.Log("POWER UP: Health " + health);
     }
 
     public void FasterStronger()
@@ -285,6 +290,7 @@ public class Player_Controller : MonoBehaviour
         topSpeed = 10.0f;
         jumpForce = 10.0f;
         timeStronger = 10.0f;
+        Debug.Log("POWER UP: Faster Stronger");
         StartCoroutine(StartCountdownStronger());
     }
 
@@ -292,7 +298,7 @@ public class Player_Controller : MonoBehaviour
     {
         isShielded = true;
         timeShield = 10.0f;
-        Debug.Log("shielded activated: " + isShielded);
+        Debug.Log("POWER UP: Shield " + isShielded);
         StartCoroutine(StartCountdownShield());
     }
 }
