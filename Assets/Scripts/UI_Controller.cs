@@ -14,39 +14,45 @@ public class UI_Controller : MonoBehaviour {
     private Game_Manager managerScript;
     private GameObject manager;
 
+    private bool folkparken;
 
     // Use this for initialization
     void Start()
     {
+        if (Application.loadedLevelName == "Folkparken")
+            folkparken = true;
+        else
+            folkparken = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player == null)
+        if(folkparken)
         {
-            player = GameObject.FindWithTag("Player");
-            playerScript = player.GetComponent<Player_Controller>();
-            Debug.Log("Player found!");
+            if (player == null)
+            {
+                player = GameObject.FindWithTag("Player");
+                playerScript = player.GetComponent<Player_Controller>();
+                Debug.Log("Player found!");
+            }
+            if (manager == null)
+            {
+                manager = GameObject.Find("Game Manager");
+                managerScript = manager.GetComponent<Game_Manager>();
+                Debug.Log("Manager found!");
+            }
+
+
+            if (playerScript.health <= 0)
+                healthText.text = "Oj oj";
+            else
+                healthText.text = "x " + playerScript.health.ToString();
+
+            scoreText.text = "SCORE: " + PlayerStats.Score.ToString();
+
+            timeText.text = "TIME: " + managerScript.gameTime.ToString("0");
         }
-        if(manager == null)
-        {
-            manager = GameObject.Find("Game Manager");
-            managerScript = manager.GetComponent<Game_Manager>();
-            Debug.Log("Manager found!");
-        }
-
-
-        if (playerScript.health <= 0)
-            healthText.text = "Oj oj";
-        else
-            healthText.text = "x " + playerScript.health.ToString();
-
-        scoreText.text = "SCORE: " + playerScript.score.ToString();
-
-        timeText.text = managerScript.gameTime.ToString("0");
-
-
     }
 }

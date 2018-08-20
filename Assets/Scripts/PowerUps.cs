@@ -58,14 +58,16 @@ public class PowerUps : MonoBehaviour {
             {
                 Debug.Log("PINAPPLE!!!");
                 player.AddHealth(healthAmount);
-                player.score += 1000;
+                // player.score += 1000;
+                PlayerStats.Score = 1000;
                 Destroy(gameObject);
             }
             // Shield player once
             if(name.Contains("Broosh"))
             {
                 Debug.Log("BROOOOOOOSH!!!");
-                player.score += 500;
+                // player.score += 500;
+                PlayerStats.Score = 500;
                 player.Shielded();
                 Destroy(gameObject);
             }
@@ -73,9 +75,15 @@ public class PowerUps : MonoBehaviour {
             if(name.Contains("Cubes"))
             {
                 Debug.Log("CUUUUUBE!!!");
-                player.score += 500;
+                //player.score += 500;
+                PlayerStats.Score = 500;
                 player.FasterStronger();
                 Destroy(gameObject);
+            }
+            if(name.Contains("Nollan"))
+            {
+                Debug.Log("NÄMEN HEEEEJ NOLLAN");
+                player.score += 5000;
             }
         }
     }

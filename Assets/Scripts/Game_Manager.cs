@@ -29,7 +29,10 @@ public class Game_Manager : MonoBehaviour {
         gameTime -= Time.deltaTime;
 
         if (gameTime <= 0)
+        {
             Application.LoadLevel("Game over");
+        }
+            
 
 
 	}
